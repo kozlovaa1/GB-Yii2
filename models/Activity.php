@@ -44,6 +44,20 @@ class Activity extends \yii\base\Model
      */
     public $body;
 
+    /**
+     * Правило повторения события
+     *
+     * @var string
+     */
+    public $repeat;
+
+    /**
+     * Статус блокировки события
+     *
+     * @var boolean
+     */
+    public $blocking;
+
     public function attributeLabels()
     {
         return [
