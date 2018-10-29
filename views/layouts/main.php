@@ -65,6 +65,9 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
+
+        <?=Html::a('Предыдущая страница', Yii::$app->session->getFlash('previousPage')) ?>
+
         <?= $content ?>
     </div>
 </div>
