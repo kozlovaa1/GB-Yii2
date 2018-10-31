@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\сomponents\ActivityComponent;
 use Yii;
 use app\models\Activity;
 use app\models\ActivitySearch;
@@ -38,7 +39,15 @@ class ActivityController extends BaseController
         $searchModel = new ActivitySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        /** @var ActivityComponent $activity_dao */
+        $activity_dao = Yii::createObject([
+            'class'=>ActivityComponent::class
+        ]);
+
+        $activities = $activity_dao->getAllActivitiesArray();
+
         return $this->render('index', [
+            'activities' => $activities,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

@@ -10,6 +10,9 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Activities'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?=Html::a('Назад в календарь', Yii::$app->session->getFlash('previousPage')) ?>
+
 <div class="activity-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
