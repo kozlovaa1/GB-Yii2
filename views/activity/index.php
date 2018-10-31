@@ -1,17 +1,37 @@
 <?php
-/* @var $this yii\web\View */
-/* @var $model app\models\Activity */
 
-$this->title = 'Событие ' . $model->title;
+use yii\helpers\Html;
+use yii\grid\GridView;
+
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\ActivitySearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = Yii::t('app', 'Activities');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1>Активность: <?= $model->title; ?></h1>
+<div class="activity-index">
+    <h1>Активность: <?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-<?php if ($model->startDay == $model->endDay): ?>
-    <p>Событие на <?= date("d.m.Y", $model->startDay) ?></p>
-<?php else: ?>
-    <p>Событие c <?= date("d.m.Y", $model->startDay) ?> по <?= date("d.m.Y", $model->endDay) ?></p>
-<?php endif; ?>
+    <p>
+        <?= Html::a(Yii::t('app', 'Create Activity'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
-<h3><?= $model->getAttributeLabel('body') ?></h3>
-<div><?= $model->body ?></div>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'title',
+            'start_day',
+            'end_day',
+            'user_id',
+            //'body',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+</div>
