@@ -66,8 +66,6 @@ AppAsset::register($this);
         ]) ?>
         <?= Alert::widget() ?>
 
-        <?=Html::a('Предыдущая страница', Yii::$app->session->getFlash('previousPage')) ?>
-
         <?= $content ?>
     </div>
 </div>
