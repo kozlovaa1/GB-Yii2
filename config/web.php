@@ -57,6 +57,14 @@ $config = [
             'decimalSeparator' => ',',
             'thousandSeparator' => ''
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
+    ],
+    'modules' => [
+        'rbac' =>  [
+            'class' => 'johnitvn\rbacplus\Module'
+        ]
     ],
     'params' => $params,
 ];
