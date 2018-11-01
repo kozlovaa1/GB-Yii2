@@ -17,9 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php if ($model->start_day == $model->end_day): ?>
-        <p>Событие на <?= $model->start_day/*date("d.m.Y", $model->start_day)*/ ?></p>
+        <p>Событие на <?= $model->start_day; ?></p>
     <?php else: ?>
-        <p>Событие c <?= $model->start_day/*date("d.m.Y", $model->start_day)*/ ?> по <?= date("d.m.Y", $model->end_day) ?></p>
+        <p>Событие c <?= $model->start_day; ?> по <?=$model->end_day;?></p>
     <?php endif; ?>
 
     <h3><?= $model->getAttributeLabel('body') ?></h3>
