@@ -9,7 +9,7 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
@@ -49,6 +49,13 @@ $config = [
             'showScriptName' => false,
             'rules' => [
             ],
+        ],
+        'formatter' => [
+            'datetimeFormat' => 'dd.MM.yyyy H:i:s',
+            'dateFormat' => 'dd.MM.yyyy',
+            'currencyCode' => 'RUB',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ''
         ],
     ],
     'params' => $params,
