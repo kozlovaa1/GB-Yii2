@@ -51,7 +51,7 @@ $config = [
             ],
         ],
         'formatter' => [
-            'datetimeFormat' => 'dd.MM.yyyy H:i:s',
+            'datetimeFormat' => 'dd.mm.yyyy H:i:s',
             'dateFormat' => 'dd.MM.yyyy',
             'currencyCode' => 'RUB',
             'decimalSeparator' => ',',

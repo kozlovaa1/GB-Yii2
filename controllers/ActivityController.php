@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\behaviors\DurationBehavior;
 use app\сomponents\ActivityComponent;
 use Yii;
 use app\models\Activity;
@@ -66,8 +67,13 @@ class ActivityController extends BaseController
      */
     public function actionView($id)
     {
+        $model=Activity::findOne(['id'=>$id]);
+        $model->attachBehavior('duration',['class'=>DurationBehavior::class,
+            'finish_attribute' => 'finish',
+            'start_attribute' => 'start']);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
