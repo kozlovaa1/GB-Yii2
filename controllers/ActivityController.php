@@ -41,13 +41,18 @@ class ActivityController extends BaseController
 
         /** @var ActivityComponent $activity_dao */
         $activity_dao = Yii::createObject([
-            'class'=>ActivityComponent::class
+            'class' => ActivityComponent::class
         ]);
 
-        $activities = $activity_dao->getAllActivitiesArray();
+        //$activities = $activity_dao->getAllActivitiesArray();
+
+        $model = Activity::find()->orderBy('start_day')->all();
+       /* foreach ($model as $activity) {
+            print_r($activity);
+        }*/
 
         return $this->render('index', [
-            'activities' => $activities,
+            'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -77,6 +82,8 @@ class ActivityController extends BaseController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            $model->getErrors();
         }
 
         return $this->render('create', [
