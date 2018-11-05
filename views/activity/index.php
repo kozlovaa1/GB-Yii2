@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\grid\GridView;
+use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
@@ -9,6 +9,7 @@ use yii\helpers\ArrayHelper;
 /* @var $searchModel app\models\ActivitySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $activities app\controllers\ActivityController */
+/* @var $model app\controllers\ActivityController */
 
 $this->title = Yii::t('app', 'Activities');
 $this->params['breadcrumbs'][] = $this->title;
@@ -31,10 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-8">
             <h3>Список активностей</h3>
+            <? echo '121'; ?>
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -48,21 +49,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 </tr>
                 </thead>
                 <tbody>
-                <? foreach ($activities as $activity) {
-                    print_r($activity);?>
-                    <!--<td><?/*= ArrayHelper::getValue($activity, 'id'); */?></td>
-                    <td><?/*= ArrayHelper::getValue($activity, 'title'); */?></td>
-                    <td><?/*= ArrayHelper::getValue($activity, 'start_day'); */?></td>
-                    <td><?/*= ArrayHelper::getValue($activity, 'end_day'); */?></td>
-                    <td><?/*= ArrayHelper::getValue($activity, 'user_id'); */?></td>
-                    <td><?/*= ArrayHelper::getValue($activity, 'is_repeat'); */?></td>
-                    <td><?/*= ArrayHelper::getValue($activity, 'is_block'); */?></td>-->
+                <?php print_r($model);
+                echo 111; ?>
+                <? foreach ($model as $activity){
+                    print_r($activity); ?>
+                <tr>
+<!--                    <td><?/*= ArrayHelper::getValue($activity, 'id');
+                    */?></td>
+                    <td><?/*= ArrayHelper::getValue($activity, 'title');
+                    */?></td>
+                    <td><?/*= ArrayHelper::getValue($activity, 'start_day');
+                    */?></td>
+                    <td><?/*= ArrayHelper::getValue($activity, 'end_day');
+                    */?></td>
+                    <td><?/*= ArrayHelper::getValue($activity, 'user_id');
+                    */?></td>
+                    <td><?/*= ArrayHelper::getValue($activity, 'is_repeat');
+                    */?></td>
+                    <td><?/*= ArrayHelper::getValue($activity, 'is_block');
+                    */?></td>-->
+                </tr>
                 <? } ?>
                 </tbody>
             </table>
         </div>
     </div>
-    <? /*= GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -77,5 +89,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); */ ?>
+    ]); ?>
 </div>

@@ -63,7 +63,14 @@ $config = [
     ],
     'modules' => [
         'rbac' =>  [
-            'class' => 'johnitvn\rbacplus\Module'
+            'class' => 'johnitvn\rbacplus\Module',
+            'userModelClassName'=>null,
+            'userModelIdField'=>'id',
+            'userModelLoginField'=>'name',
+            'userModelLoginFieldLabel'=>null,
+            'userModelExtraDataColumls'=>null,
+            'beforeCreateController'=>null,
+            'beforeAction'=>null
         ]
     ],
     'params' => $params,
