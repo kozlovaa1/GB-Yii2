@@ -9,7 +9,18 @@
 namespace app\models;
 
 
+use app\behaviors\DurationBehavior;
+
 class Activity extends ActivityBase
 {
-
+    public function behaviors()
+    {
+        return  [
+            'duration'=>[
+                'class'=>DurationBehavior::class,
+                'start_attribute' => 'start',
+                'finish_attribute' => 'finish'
+            ]
+        ];
+    }
 }

@@ -21,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php else: ?>
         <p>Событие c <?= $model->start_day; ?> по <?=$model->end_day;?></p>
     <?php endif; ?>
-
     <h3><?= $model->getAttributeLabel('body') ?></h3>
     <div><?= $model->body ?></div>
     <p>

@@ -47,6 +47,14 @@ class ActivitySearch extends Activity
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 10
+            ],
+            'sort' => [
+                'defaultOrder' =>[
+                    'start'=>SORT_DESC
+                ]
+            ]
         ]);
 
         $this->load($params);
