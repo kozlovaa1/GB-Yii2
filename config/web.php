@@ -51,8 +51,8 @@ $config = [
             ],
         ],
         'formatter' => [
-            'datetimeFormat' => 'dd.mm.yyyy H:i:s',
-            'dateFormat' => 'dd.MM.yyyy',
+            'datetimeFormat' => 'd.m.Y H:i:s',
+            'dateFormat' => 'd.m.Y',
             'currencyCode' => 'RUB',
             'decimalSeparator' => ',',
             'thousandSeparator' => ''
@@ -60,17 +60,35 @@ $config = [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
+        'i18n' => [
+            'translations' => [
+                'rbac' => [
+                    'class' => \yii\i18n\PhpMessageSource::className(),
+                    'basePath' => '@app/modules/rbac/messages',
+                ],
+            ],
+        ],
     ],
     'modules' => [
         'rbac' =>  [
             'class' => 'johnitvn\rbacplus\Module',
             'userModelClassName'=>null,
             'userModelIdField'=>'id',
-            'userModelLoginField'=>'name',
+            'userModelLoginField'=>'email',
             'userModelLoginFieldLabel'=>null,
-            'userModelExtraDataColumls'=>null,
+            'userModelExtraDataColumls'=>[
+                [
+                    'attributes'=>'created_at',
+                    'value'=>function($model){
+                        return date('d.m.Y H:i:s', $model->created_at);
+                    }
+                ]
+            ],
             'beforeCreateController'=>null,
             'beforeAction'=>null
+        ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
         ]
     ],
     'params' => $params,

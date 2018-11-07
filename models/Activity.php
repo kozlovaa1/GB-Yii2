@@ -18,9 +18,13 @@ class Activity extends ActivityBase
         return  [
             'duration'=>[
                 'class'=>DurationBehavior::class,
-                'start_attribute' => 'start',
-                'finish_attribute' => 'finish'
+                'start_attribute' => 'start_day',
+                'finish_attribute' => 'end_day'
             ]
         ];
+    }
+    public function beforeValidate()
+    {
+
     }
 }

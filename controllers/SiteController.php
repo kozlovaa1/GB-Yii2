@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Response;
@@ -130,8 +131,20 @@ class SiteController extends BaseController
      *
      * @return string
      */
-    public function actionHello()
+    public function actionCreateUser()
     {
-        return $this->render('hello');
+
+        $user = new User();
+
+        $user->auth_key = Yii::$app->security->generateRandomString();
+
+        
+
+        if ($user->load(Yii::$app->request->post()) && $user->save()) {
+            return $this->redirect(['create-user', 'user'=>$user->username]);
+        } else {
+            print_r($user->getErrors());
+        }
+        return $this->render('create-user', ['model' => $user]);
     }
 }

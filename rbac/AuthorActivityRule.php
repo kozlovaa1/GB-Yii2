@@ -26,6 +26,6 @@ class AuthorActivityRule extends Rule
      */
     public function execute($user, $item, $params)
     {
-        return isset($params['activity'])?$params['activity']:false;
+        return isset($params['activity'])?$params['activity']->user_id==$user:false;
     }
 }

@@ -26,7 +26,7 @@ class m181031_175051_createTables extends Migration
 
         $this->createTable('user', [
             'id'=>$this->primaryKey(),
-            'name'=>$this->string('250'),
+            'username'=>$this->string('250'),
             'auth_key'=>$this->string('250'),
             'password'=>$this->string('250'),
             'reset_token'=>$this->string('250'),
@@ -62,6 +62,7 @@ class m181031_175051_createTables extends Migration
     {
         $this->dropTable('user');
         $this->dropTable('activity');
+        $this->dropTable('day_activity');
     }
 
     /*
