@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "user".
  *
  * @property int $id
- * @property string $name
+ * @property string $username
  * @property string $auth_key
  * @property string $password
  * @property string $reset_token
@@ -36,7 +36,7 @@ class UserBase extends \yii\db\ActiveRecord
         return [
             [['status'], 'integer'],
             [['created_at'], 'safe'],
-            [['name', 'auth_key', 'password', 'reset_token', 'email'], 'string', 'max' => 250],
+            [['username', 'auth_key', 'password', 'reset_token', 'email'], 'string', 'max' => 250],
         ];
     }
 
@@ -47,7 +47,7 @@ class UserBase extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'username' => Yii::t('app', 'Username'),
             'auth_key' => Yii::t('app', 'Auth Key'),
             'password' => Yii::t('app', 'Password'),
             'reset_token' => Yii::t('app', 'Reset Token'),

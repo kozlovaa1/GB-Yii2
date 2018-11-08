@@ -53,14 +53,14 @@ class ActivityBase extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title'),
-            'start_day' => Yii::t('app', 'Start Day'),
-            'end_day' => Yii::t('app', 'End Day'),
-            'body' => Yii::t('app', 'Body'),
-            'is_repeat' => Yii::t('app', 'Is Repeat'),
-            'is_block' => Yii::t('app', 'Is Block'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'title' => Yii::t('app', 'Название'),
+            'start_day' => Yii::t('app', 'Начало активности'),
+            'end_day' => Yii::t('app', 'Конец активности'),
+            'body' => Yii::t('app', 'Описание'),
+            'is_repeat' => Yii::t('app', 'Повторяющееся'),
+            'is_block' => Yii::t('app', 'Блокирующее'),
+            'user_id' => Yii::t('app', 'ID пользователя'),
+            'created_at' => Yii::t('app', 'Дата создания'),
         ];
     }
 

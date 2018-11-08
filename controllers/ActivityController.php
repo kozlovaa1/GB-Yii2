@@ -8,6 +8,7 @@ use Yii;
 use app\models\Activity;
 use app\models\ActivitySearch;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -37,6 +38,9 @@ class ActivityController extends BaseController
      */
     public function actionIndex()
     {
+        if(Yii::$app->user->can('viewActivity')){
+            throw new ForbiddenHttpException('viewActivity');
+        }
         $searchModel = new ActivitySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -48,9 +52,6 @@ class ActivityController extends BaseController
         //$activities = $activity_dao->getAllActivitiesArray();
 
         $model = Activity::find()->orderBy('start_day')->all();
-       /* foreach ($model as $activity) {
-            print_r($activity);
-        }*/
 
         return $this->render('index', [
             'model' => $model,
@@ -69,8 +70,8 @@ class ActivityController extends BaseController
     {
         $model=Activity::findOne(['id'=>$id]);
         $model->attachBehavior('duration',['class'=>DurationBehavior::class,
-            'finish_attribute' => 'finish',
-            'start_attribute' => 'start']);
+            'finish_attribute' => 'end_day',
+            'start_attribute' => 'start_day']);
 
         return $this->render('view', [
             'model' => $model,
@@ -107,6 +108,10 @@ class ActivityController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        if(!Yii::$app->user->can('updateActivity', ['activity'=>$model])) {
+            throw new ForbiddenHttpException('updateActivity');
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
