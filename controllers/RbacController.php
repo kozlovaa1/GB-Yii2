@@ -44,11 +44,11 @@ class RbacController extends Controller
         $viewActivity->description='Просмотр события';
 
         $auth->add($createActivity);
-        $auth->add($createActivity);
+        $auth->add($viewActivity);
 
         $auth->addChild($simple, $viewActivity);
 
-        $auth->addChild($admin, $simple);
+        $auth->addChild($admin, $viewActivity);
 
         $auth->addChild($admin, $createActivity);
 

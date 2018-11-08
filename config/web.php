@@ -70,7 +70,7 @@ $config = [
         ],
     ],
     'modules' => [
-        'rbac' =>  [
+        'rbacplus' =>  [
             'class' => 'johnitvn\rbacplus\Module',
             'userModelClassName'=>null,
             'userModelIdField'=>'id',
