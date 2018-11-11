@@ -21,10 +21,9 @@ use kartik\widgets\DateTimePicker;
             $form->field($model, 'start_day')->textInput()->widget(DateTimePicker::className(), [
                 'name' => 'start_date',
                 'options' => ['placeholder' => 'Начало активности...'],
-                'convertFormat' => true,
                 'pluginOptions' => [
                     'autoclose' => true,
-                    'format' => Yii::$app->formatter->datetimeFormat,
+                    'format' => 'dd.mm.yyyy hh:ii',
                     'language' => 'ru',
                 ]
             ]); ?>
@@ -34,10 +33,9 @@ use kartik\widgets\DateTimePicker;
             $form->field($model, 'end_day')->textInput()->widget(DateTimePicker::className(), [
                 'name' => 'end_date',
                 'options' => ['placeholder' => 'Конец активности...'],
-                'convertFormat' => true,
                 'pluginOptions' => [
                     'autoclose' => true,
-                    'format' => Yii::$app->formatter->datetimeFormat,
+                    'format' => 'dd.mm.yyyy hh:ii',
                     'language' => 'ru',
                 ]
             ]); ?>

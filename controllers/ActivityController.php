@@ -38,26 +38,32 @@ class ActivityController extends BaseController
      */
     public function actionIndex()
     {
-        if(Yii::$app->user->can('viewActivity')){
-            throw new ForbiddenHttpException('viewActivity');
+        if (Yii::$app->user->can('viewActivity')) {
+
+            $searchModel = new ActivitySearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            $activities = Yii::$app->db->cache(function () {
+                return Yii::$app->db->createCommand();
+            });
+
+            /** @var ActivityComponent $activity_dao */
+            $activity_dao = Yii::createObject([
+                'class' => ActivityComponent::class
+            ]);
+
+            //$activities = $activity_dao->getAllActivitiesArray();
+
+            $model = Activity::find()->orderBy('start_day')->all();
+
+            return $this->render('index', [
+                'model' => $model,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            throw new ForbiddenHttpException('Необходимо авторизоваться. Permission: viewActivity');
         }
-        $searchModel = new ActivitySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        /** @var ActivityComponent $activity_dao */
-        $activity_dao = Yii::createObject([
-            'class' => ActivityComponent::class
-        ]);
-
-        //$activities = $activity_dao->getAllActivitiesArray();
-
-        $model = Activity::find()->orderBy('start_day')->all();
-
-        return $this->render('index', [
-            'model' => $model,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
     }
 
     /**
@@ -68,10 +74,10 @@ class ActivityController extends BaseController
      */
     public function actionView($id)
     {
-        $model=Activity::findOne(['id'=>$id]);
-        $model->attachBehavior('duration',['class'=>DurationBehavior::class,
+        $model = Activity::findOne(['id' => $id]);
+        /*$model->attachBehavior('duration', ['class' => DurationBehavior::class,
             'finish_attribute' => 'end_day',
-            'start_attribute' => 'start_day']);
+            'start_attribute' => 'start_day']);*/
 
         return $this->render('view', [
             'model' => $model,
@@ -85,17 +91,21 @@ class ActivityController extends BaseController
      */
     public function actionCreate()
     {
+
         $model = new Activity();
+        if (!Yii::$app->user->can('createActivity', ['activity' => $model])) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                $model->getErrors();
+            }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         } else {
-            $model->getErrors();
+            throw new ForbiddenHttpException('createActivity');
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -109,17 +119,20 @@ class ActivityController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if(!Yii::$app->user->can('updateActivity', ['activity'=>$model])) {
+        if (!Yii::$app->user->can('updateActivity', ['activity' => $model])) {
+
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                $model->trigger(Yii::$app->params['EVENT_STATUS']);
+//                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
             throw new ForbiddenHttpException('updateActivity');
         }
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
