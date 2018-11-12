@@ -21,6 +21,6 @@ class DurationBehavior extends Behavior
         $date2 = new \DateTime($this->owner->{$this->finish_attribute});
         $interval = $date1->diff($date2);
 
-        return $interval->days . ' дней ' . $interval->h . ' часов ' . $interval->m . ' минут.';
+        return $interval->days . ' дней ' . $interval->h . ' часов и ' . $interval->m . ' минут.';
     }
 }

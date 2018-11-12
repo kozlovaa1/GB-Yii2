@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-md-8">
             <h3>Список активностей</h3>
-            <?/*= GridView::widget([
+            <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
-            ]); */?>
+            ]); ?>
         </div>
     </div>
 

@@ -52,10 +52,15 @@ class ActivitySearch extends Activity
             ],
             'sort' => [
                 'defaultOrder' =>[
-                    'start'=>SORT_DESC
+                    'start_day'=>SORT_DESC
                 ]
             ]
         ]);
+
+        $dataProvider->getModels();
+        $dataProvider->getCount();
+        $dataProvider->getTotalCount();
+        $dataProvider->getKeys();
 
         $this->load($params);
 

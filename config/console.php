@@ -14,7 +14,11 @@ $config = [
     ],
     'components' => [
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\caching\MemCache',
+            'useMemcached' => true
+        ],
+        'session'=>[
+            'class'=>'yii\web\CacheSession'
         ],
         'log' => [
             'targets' => [
